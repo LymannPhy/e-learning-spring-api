@@ -1,66 +1,82 @@
-String readme = 
-"# E-Learning Spring Boot REST API\n" +
-"\n" +
-"📘🌱🚀\n" +
-"\n" +
-"This project is a Spring Boot-based REST API for an e-learning platform. It aims to provide a robust and scalable backend solution for managing various resources and functionalities related to e-learning, including courses, instructors, students, user profiles, enrollment, and more.\n" +
-"\n" +
-"## Team Members\n" +
-"\n" +
-"- PHY LYMANN\n" +
-"- THEONG MENGSEU\n" +
-"- POV SOKNY\n" +
-"- DIM VIPHA\n" +
-"- THA THYDA\n" +
-"- LY TAINGEY\n" +
-"\n" +
-"## Getting Started\n" +
-"\n" +
-"To get started with this project, you can clone the repository using the following command:\n" +
-"\n" +
-"```bash\n" +
-"git clone https://github.com/LymannPhy/e-learning-spring-api.git\n" +
-"```\n" +
-"\n" +
-"## Features\n" +
-"\n" +
-"- **CRUD Operations:** Perform CRUD operations for managing courses, instructors, students, and more.\n" +
-"- **User Authentication:** Implement user authentication and authorization for secure access.\n" +
-"- **Enrollment Management:** Manage course enrollments for students.\n" +
-"- **Search Functionality:** Implement search functionality to find courses and instructors.\n" +
-"- **Scalable Architecture:** Built on Spring Boot, providing scalability and flexibility.\n" +
-"\n" +
-"## Installation and Setup\n" +
-"\n" +
-"1. Clone the repository using the command provided above.\n" +
-"2. Open the project in your preferred IDE.\n" +
-"3. Configure the project dependencies and database settings.\n" +
-"4. Run the application and start testing the API endpoints.\n" +
-"\n" +
-"## Usage\n" +
-"\n" +
-"The API provides endpoints for performing various actions, such as:\n" +
-"\n" +
-"- Creating, retrieving, updating, and deleting courses, instructors, and students.\n" +
-"- Enrolling students in courses.\n" +
-"- Authenticating users and managing user profiles.\n" +
-"\n" +
-"Refer to the API documentation or explore the codebase for more details on available endpoints and their usage.\n" +
-"\n" +
-"## Contributing\n" +
-"\n" +
-"Contributions are welcome! If you'd like to contribute to this project, please follow these steps:\n" +
-"\n" +
-"1. Fork the repository.\n" +
-"2. Create your feature branch (`git checkout -b feature/YourFeature`).\n" +
-"3. Commit your changes (`git commit -am 'Add some feature'`).\n" +
-"4. Push to the branch (`git push origin feature/YourFeature`).\n" +
-"5. Open a pull request.\n" +
-"\n" +
-"Please make sure to follow the code style and guidelines established in the project.\n" +
-"\n" +
-"## License\n" +
-"\n" +
-"This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
 
-System.out.println(readme);
+<h1>E-Learning Spring Boot REST API</h1>
+
+<p>📘🌱🚀</p>
+
+<p>This project is a Spring Boot-based REST API for an e-learning platform. It aims to provide a robust and scalable backend solution for managing various resources and functionalities related to e-learning, including courses, instructors, students, user profiles, enrollment, and more.</p>
+
+<h2>✨Team Members</h2>
+
+<ul>
+    <li>PHY LYMANN</li>
+    <li>THEONG MENGSEU</li>
+    <li>POV SOKNY</li>
+    <li>DIM VIPHA</li>
+    <li>THA THYDA</li>
+    <li>LY TAINGEY</li>
+</ul>
+
+<h2>✨Getting Started</h2>
+
+<p>To get started with this project, you can clone the repository using the following command:</p>
+
+<pre><code>git clone https://github.com/LymannPhy/e-learning-spring-api.git</code></pre>
+
+<h2>✨Features</h2>
+
+<ul>
+    <li><strong>CRUD Operations:</strong> Perform CRUD operations for managing courses, instructors, students, and more.</li>
+    <li><strong>User Authentication:</strong> Implement user authentication and authorization for secure access.</li>
+    <li><strong>Enrollment Management:</strong> Manage course enrollments for students.</li>
+    <li><strong>Search Functionality:</strong> Implement search functionality to find courses and instructors.</li>
+    <li><strong>Scalable Architecture:</strong> Built on Spring Boot, providing scalability and flexibility.</li>
+</ul>
+
+<h2>✨Installation and Setup</h2>
+
+<ol>
+    <li>Clone the repository using the command provided above.</li>
+    <li>Open the project in your preferred IDE.</li>
+    <li>Configure the project dependencies and database settings.</li>
+    <li>Run the application and start testing the API endpoints.</li>
+</ol>
+
+<h2>✨Usage</h2>
+
+<p>The API provides endpoints for performing various actions, such as:</p>
+
+<ul>
+    <li>Creating, retrieving, updating, and deleting courses, instructors, and students.</li>
+    <li>Enrolling students in courses.</li>
+    <li>Authenticating users and managing user profiles.</li>
+</ul>
+
+<p>Refer to the API documentation or explore the codebase for more details on available endpoints and their usage.</p>
+
+<h2>✨Contributing</h2>
+
+<p>Contributions are welcome! If you'd like to contribute to this project, please follow these steps:</p>
+
+<ol>
+    <li>Fork the repository.</li>
+    <li>Create your feature branch (<code>git checkout -b feature/YourFeature</code>).</li>
+    <li>Commit your changes (<code>git commit -am 'Add some feature'</code>).</li>
+    <li>Push to the branch (<code>git push origin feature/YourFeature</code>).</li>
+    <li>Open a pull request.</li>
+</ol>
+
+<p>Please make sure to follow the code style and guidelines established in the project.</p>
+
+<h2>✨License</h2>
+
+<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+
+</body>
+</html>
