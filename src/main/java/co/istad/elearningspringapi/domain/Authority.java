@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -18,5 +20,7 @@ public class Authority {
 
     @Column(nullable = false, unique = true)
     private String name;
-}
 
+    @ManyToMany(mappedBy = "authorities")
+    private List<Role> roles;
+}
