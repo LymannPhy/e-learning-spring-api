@@ -1,4 +1,4 @@
-package co.istad.elearningspringapi.feature.Enrollment;
+package co.istad.elearningspringapi.feature.enrollment;
 
 import co.istad.elearningspringapi.domain.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;

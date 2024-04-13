@@ -1,4 +1,4 @@
-package co.istad.elearningspringapi.feature.Enrollment.dto;
+package co.istad.elearningspringapi.feature.enrollment.dto;
 
 public record EnrollmentFilter(
         String code,

@@ -1,4 +1,4 @@
-package co.istad.elearningspringapi.feature.Enrollment.dto;
+package co.istad.elearningspringapi.feature.enrollment.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

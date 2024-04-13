@@ -1,11 +1,11 @@
-package co.istad.elearningspringapi.feature.Enrollment;
+package co.istad.elearningspringapi.feature.enrollment;
 
 import co.istad.elearningspringapi.domain.Course;
 import co.istad.elearningspringapi.domain.Enrollment;
 import co.istad.elearningspringapi.domain.Student;
-import co.istad.elearningspringapi.feature.Enrollment.dto.EnrollmentCreateRequest;
-import co.istad.elearningspringapi.feature.Enrollment.dto.EnrollmentFilter;
-import co.istad.elearningspringapi.feature.Enrollment.dto.EnrollmentResponse;
+import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentCreateRequest;
+import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentFilter;
+import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentResponse;
 import co.istad.elearningspringapi.feature.courses.CourseRepository;
 import co.istad.elearningspringapi.feature.student.StudentRepository;
 import co.istad.elearningspringapi.map.EnrollmentMapper;
