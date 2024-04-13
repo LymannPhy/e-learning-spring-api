@@ -80,4 +80,15 @@ public class UserServiceImpl implements UserService{
         user.setIsDeleted(false);
         userRepository.save(user);
     }
+
+    @Override
+    public void deleteUserByUserName(String userName) {
+        User user = userRepository.findByUsername(userName)
+                .orElseThrow(()->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "User has been not found"
+                        ));
+        userRepository.delete(user);
+    }
 }

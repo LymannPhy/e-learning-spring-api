@@ -33,4 +33,9 @@ public class UserController {
     void enableUserByUuid(@PathVariable String uuid){
         userService.enableUserByUuid(uuid);
     }
+
+    @DeleteMapping("{userName}/delete")
+    void deleteUserByUuid(@PathVariable String userName){
+        userService.deleteUserByUserName(userName);
+    }
 }

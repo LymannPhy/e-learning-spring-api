@@ -13,4 +13,5 @@ public interface UserService {
 
     void enableUserByUuid(String uuid);
 
+    void deleteUserByUserName(String userName);
 }
