@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -28,7 +28,14 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @OneToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @OneToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
     private String givenName;
 
     private String familyName;
@@ -41,6 +48,7 @@ public class User {
 
     private String address2;
 
+    @Column(length = 30, nullable = false)
     private String phoneNumber;
 
     private Boolean isVerified;
@@ -49,6 +57,7 @@ public class User {
 
     private Boolean isDeleted;
 
+    @Column(length = 30, unique = true, nullable = false)
     private String nationalIdCard;
 
     private String profile;
