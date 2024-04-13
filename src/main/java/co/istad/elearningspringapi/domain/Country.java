@@ -20,14 +20,15 @@ public class Country {
 
     private String flag;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true,length = 10)
     private String iso;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 60)
     private String name;
 
     private String niceName;
 
+    @Column(nullable = false)
     private Integer numCode;
 
     @Column(nullable = false)

@@ -23,6 +23,7 @@ public class Course {
     @JoinColumn(name = "cat_id")
     private Category category;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne

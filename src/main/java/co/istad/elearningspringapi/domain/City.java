@@ -20,7 +20,7 @@ public class City {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 60)
     private String name;
 
 }
