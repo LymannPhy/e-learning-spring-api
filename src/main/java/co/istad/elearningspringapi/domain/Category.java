@@ -16,12 +16,12 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String alias;
 
     private String icon;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 60)
     private String name;
 
     private Boolean isDeleted;
