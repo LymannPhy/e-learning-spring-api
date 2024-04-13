@@ -28,6 +28,14 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @OneToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @OneToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
     private String givenName;
 
     private String familyName;
