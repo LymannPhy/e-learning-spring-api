@@ -68,4 +68,14 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                         ));
         return enrollmentMapper.toAccountResponse(enrollment);
     }
+
+    @Override
+    public void updateEnrollmentProgress(String code, Integer progress) {
+        Enrollment enrollment = enrollmentRepository.findByCode(code)
+                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Enrollment not found with code"
+                        ));
+        enrollment.setProgress(progress);
+        enrollmentRepository.save(enrollment);
+    }
 }

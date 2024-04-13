@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/enrollment")
+@RequestMapping("api/v1/enrollment")
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
     @PostMapping
@@ -32,5 +32,13 @@ public class EnrollmentController {
     @GetMapping("/{code}")
     public EnrollmentResponse findEnrollmentByCode(@PathVariable String code){
         return enrollmentService.findEnrollmentByCode(code);
+    }
+
+    @PutMapping("/{code}/progress")
+    public void updateEnrollmentProgress(
+            @PathVariable String code,
+            @RequestParam Integer progress
+    ) {
+        enrollmentService.updateEnrollmentProgress(code, progress);
     }
 }
