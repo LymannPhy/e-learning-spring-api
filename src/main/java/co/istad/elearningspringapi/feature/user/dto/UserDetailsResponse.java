@@ -46,6 +46,8 @@ public record UserDetailsResponse(
 
         Student student,
 
+        String uuid,
+
         List<Role> roles
 ) {
 

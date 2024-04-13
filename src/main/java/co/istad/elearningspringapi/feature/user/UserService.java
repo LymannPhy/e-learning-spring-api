@@ -8,4 +8,9 @@ public interface UserService {
     Page<UserDetailsResponse> findUsers(int page,int size, String sort);
 
     UserDetailsResponse findByUserName(String userName);
+
+    void disableUserByUuid(String uuid);
+
+    void enableUserByUuid(String uuid);
+
 }

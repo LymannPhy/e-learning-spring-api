@@ -23,4 +23,14 @@ public class UserController {
     UserDetailsResponse findByUserName(@PathVariable String userName){
         return userService.findByUserName(userName);
     }
+
+    @PutMapping("{uuid}/disable")
+    void disableUserByUuid(@PathVariable String uuid){
+        userService.disableUserByUuid(uuid);
+    }
+
+    @PutMapping("{uuid}/enable")
+    void enableUserByUuid(@PathVariable String uuid){
+        userService.enableUserByUuid(uuid);
+    }
 }

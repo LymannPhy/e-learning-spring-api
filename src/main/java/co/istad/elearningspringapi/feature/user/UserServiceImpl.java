@@ -56,4 +56,28 @@ public class UserServiceImpl implements UserService{
                         ));
         return userMapper.toUserDetailsResponse(user);
     }
+
+    @Override
+    public void disableUserByUuid(String uuid) {
+        User user = userRepository.findByUuid(uuid)
+                .orElseThrow(()->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "User has been not found...!"
+                        ));
+        user.setIsDeleted(true);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void enableUserByUuid(String uuid) {
+        User user = userRepository.findByUuid(uuid)
+                .orElseThrow(()->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "User has been not found...!"
+                        ));
+        user.setIsDeleted(false);
+        userRepository.save(user);
+    }
 }

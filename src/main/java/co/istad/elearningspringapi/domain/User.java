@@ -62,6 +62,9 @@ public class User {
 
     private String profile;
 
+    @Column(unique = true)
+    private String uuid;
+
     @OneToOne(mappedBy = "user")
     private Instructor instructor;
 
