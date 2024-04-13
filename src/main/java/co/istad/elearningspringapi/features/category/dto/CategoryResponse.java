@@ -7,6 +7,6 @@ public record CategoryResponse(
         String icon,
         String name,
         Boolean isDeleted,
-        Category parentCategory
+        Category parentCategoryId
 ) {
 }

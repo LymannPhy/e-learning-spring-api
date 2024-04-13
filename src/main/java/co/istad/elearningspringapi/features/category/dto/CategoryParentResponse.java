@@ -6,7 +6,6 @@ public record CategoryParentResponse(
         String alias,
         String icon,
         String name,
-        Boolean isDeleted,
-        Category category
+        Boolean isDeleted
 ) {
 }

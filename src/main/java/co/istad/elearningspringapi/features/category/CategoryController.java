@@ -1,6 +1,7 @@
 package co.istad.elearningspringapi.features.category;
 
 import co.istad.elearningspringapi.base.BasedMessage;
+import co.istad.elearningspringapi.features.category.dto.CategoryParentResponse;
 import co.istad.elearningspringapi.features.category.dto.CategoryRequest;
 import co.istad.elearningspringapi.features.category.dto.CategoryResponse;
 import jakarta.validation.Valid;
@@ -37,8 +38,12 @@ public class CategoryController {
         return categoryService.findByAlias(alias);
     }
 
-    @GetMapping("/{id}/parents")
-    List<CategoryResponse> findByParentCategoryId() {
-        return null;
+    @GetMapping("/parents")
+    List<CategoryParentResponse> findByParentCategoryId() {
+        return categoryService.findSubCategory();
+    }
+    @PutMapping("/{alias}")
+    BasedMessage updateCategoryByAlias(@PathVariable String alias,@RequestBody CategoryRequest categoryRequest){
+        return categoryService.updateCategoryByAlias(alias,categoryRequest);
     }
 }

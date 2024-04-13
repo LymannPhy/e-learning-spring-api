@@ -65,4 +65,24 @@ public class CategoryServiceImpl implements CategoryService {
         Page<Category> findAll = categoryRepository.findAll(pageRequest);
         return findAll.map(categoryMapper::toCategory);
     }
+
+    @Override
+    public List<CategoryParentResponse> findSubCategory() {
+        return categoryRepository.findByParentCategoryIsNull()
+                .stream()
+                .map(categoryMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BasedMessage updateCategoryByAlias(String alias,CategoryRequest categoryRequest) {
+        Category updateCategory = categoryRepository.findByAlias(alias).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Category has not been found in our system please try again..."
+                )
+        );
+        categoryMapper.fromUserUpadateRequest(categoryRequest, updateCategory);
+        categoryRepository.save(updateCategory);
+        return new BasedMessage("Category's has been updated...");
+    }
 }
