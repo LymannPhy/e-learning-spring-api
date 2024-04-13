@@ -26,7 +26,6 @@ public interface CategoryMapper {
     @Mapping(source = "parentCategoryId", target = "parentCategory")
     void fromUserUpadateRequest(CategoryRequest categoryRequest, @MappingTarget Category category);
 
-    @Mapping(source = "parentCategory",target = "subCategory")
-    List<CategoryParentResponse> toCategoryParentResponse(List<Category> categories);
+
 
 }

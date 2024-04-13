@@ -5,6 +5,7 @@ import co.istad.elearningspringapi.domain.Category;
 import co.istad.elearningspringapi.features.category.dto.CategoryParentResponse;
 import co.istad.elearningspringapi.features.category.dto.CategoryRequest;
 import co.istad.elearningspringapi.features.category.dto.CategoryResponse;
+import co.istad.elearningspringapi.features.category.dto.CategorySubCategoryResponse;
 import co.istad.elearningspringapi.mapper.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,6 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
-
 
 
     @Override
@@ -57,6 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
                 );
         return categoryMapper.toCategory(category);
     }
+
     @Override
     public Page<CategoryResponse> findList(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -65,7 +66,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public BasedMessage updateCategoryByAlias(String alias,CategoryRequest categoryRequest) {
+    public BasedMessage updateCategoryByAlias(String alias, CategoryRequest categoryRequest) {
         Category updateCategory = categoryRepository.findByAlias(alias).orElseThrow(
                 () -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Category has not been found in our system please try again..."
@@ -75,11 +76,40 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(updateCategory);
         return new BasedMessage("Category's has been updated...");
     }
+
+    //    @Override
+//    public List<CategoryParentResponse> getAllParentCategoriesWithSubcategories() {
+//        List<Category> categoryParentResponsesList = categoryRepository.findByParentCategoryIsNull();
+//        log.info(categoryParentResponsesList.toString());
+//        return categoryMapper.toCategoryParentResponse(categoryParentResponsesList);
+//    }
     @Override
     public List<CategoryParentResponse> getAllParentCategoriesWithSubcategories() {
-        List<Category> categoryParentResponsesList = categoryRepository.findByParentCategoryIsNull();
-        log.info(categoryParentResponsesList.toString());
-        return categoryMapper.toCategoryParentResponse(categoryParentResponsesList);
+        List<Category> parentCategories = categoryRepository.findByParentCategoryIsNull();
+
+        return parentCategories.stream()
+                .map(this::mapToCategoryParentResponse)
+                .collect(Collectors.toList());
+    }
+
+    private CategoryParentResponse mapToCategoryParentResponse(Category parentCategory) {
+        List<Category> subcategories = categoryRepository.findByParentCategory(parentCategory);
+
+        List<CategorySubCategoryResponse> subCategoryResponses = subcategories.stream()
+                .map(subcategory -> new CategorySubCategoryResponse(
+                        subcategory.getAlias(),
+                        subcategory.getIcon(),
+                        subcategory.getName()
+                ))
+                .collect(Collectors.toList());
+
+        return new CategoryParentResponse(
+                parentCategory.getAlias(),
+                parentCategory.getIcon(),
+                parentCategory.getName(),
+                parentCategory.getIsDeleted(),
+                subCategoryResponses
+        );
     }
 
 
