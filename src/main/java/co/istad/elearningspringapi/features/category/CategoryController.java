@@ -39,8 +39,8 @@ public class CategoryController {
     }
 
     @GetMapping("/parents")
-    List<CategoryParentResponse> findByParentCategoryId() {
-        return categoryService.findSubCategory();
+    List<CategoryParentResponse> getAllParentCategoriesWithSubcategories() {
+        return categoryService.getAllParentCategoriesWithSubcategories();
     }
     @PutMapping("/{alias}")
     BasedMessage updateCategoryByAlias(@PathVariable String alias,@RequestBody CategoryRequest categoryRequest){

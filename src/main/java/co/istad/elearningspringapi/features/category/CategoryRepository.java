@@ -1,6 +1,7 @@
 package co.istad.elearningspringapi.features.category;
 
 import co.istad.elearningspringapi.domain.Category;
+import co.istad.elearningspringapi.features.category.dto.CategorySubCategoryResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,4 +19,5 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
 
     List<Category> findByParentCategoryIsNull();
+
 }

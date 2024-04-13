@@ -14,7 +14,8 @@ public interface CategoryService {
     CategoryResponse findByAlias(String alias);
     Page<CategoryResponse> findList(int page,int size);
 
-    List<CategoryParentResponse> findSubCategory();
 
     BasedMessage updateCategoryByAlias(String alias,CategoryRequest categoryRequest);
+
+    List<CategoryParentResponse> getAllParentCategoriesWithSubcategories();
 }

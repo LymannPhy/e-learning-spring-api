@@ -23,9 +23,7 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
-    public List<Category> getParentCategories() {
-        return categoryRepository.findByParentCategoryIsNull();
-    }
+
 
 
     @Override
@@ -67,14 +65,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryParentResponse> findSubCategory() {
-        return categoryRepository.findByParentCategoryIsNull()
-                .stream()
-                .map(categoryMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public BasedMessage updateCategoryByAlias(String alias,CategoryRequest categoryRequest) {
         Category updateCategory = categoryRepository.findByAlias(alias).orElseThrow(
                 () -> new ResponseStatusException(
@@ -85,4 +75,12 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(updateCategory);
         return new BasedMessage("Category's has been updated...");
     }
+    @Override
+    public List<CategoryParentResponse> getAllParentCategoriesWithSubcategories() {
+        List<Category> categoryParentResponsesList = categoryRepository.findByParentCategoryIsNull();
+        log.info(categoryParentResponsesList.toString());
+        return categoryMapper.toCategoryParentResponse(categoryParentResponsesList);
+    }
+
+
 }
