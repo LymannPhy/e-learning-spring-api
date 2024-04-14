@@ -4,6 +4,7 @@ import co.istad.elearningspringapi.base.BasedMessage;
 import co.istad.elearningspringapi.domain.Course;
 import co.istad.elearningspringapi.features.category.CategoryRepository;
 import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
+import co.istad.elearningspringapi.features.courses.dto.CourseDetailResponse;
 import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
 import co.istad.elearningspringapi.features.courses.dto.CourseThumbnailRequest;
 import co.istad.elearningspringapi.mapper.CourseMapper;
@@ -44,6 +45,18 @@ public class CourseServiceImpl implements CourseService {
         Page<Course> courses = courseRepository.findAll(pageRequest);
         return courses.map(courseMapper::toCourseResponse);
     }
+
+    @Override
+    public CourseDetailResponse findCourseDetailByAlias(String alias) {
+        Course course = courseRepository.findAllByAlias(alias).
+                orElseThrow(
+                        ()->new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,"Course not found...!"
+                        )
+                );
+        return courseMapper.toCourseDetailResponse(course);
+    }
+
     @Transactional
     @Override
     public BasedMessage updateThumbnail(CourseThumbnailRequest coursethumbnailRequest, String alias) {

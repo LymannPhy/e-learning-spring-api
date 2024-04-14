@@ -2,6 +2,7 @@ package co.istad.elearningspringapi.features.courses;
 
 import co.istad.elearningspringapi.base.BasedMessage;
 import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
+import co.istad.elearningspringapi.features.courses.dto.CourseDetailResponse;
 import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
 import co.istad.elearningspringapi.features.courses.dto.CourseThumbnailRequest;
 import jakarta.validation.Valid;
@@ -31,5 +32,9 @@ public class CourseController {
     @PutMapping("/{alias}/thumbnail")
    BasedMessage thumbnail(@Valid @RequestBody CourseThumbnailRequest courseThumbnailRequest , @PathVariable String alias){
         return courseService.updateThumbnail(courseThumbnailRequest,alias);
+    }
+    @GetMapping("/{alias}")
+    CourseDetailResponse findDetail (@PathVariable String alias){
+        return courseService.findCourseDetailByAlias(alias);
     }
 }

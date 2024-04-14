@@ -1,6 +1,7 @@
 package co.istad.elearningspringapi.mapper;
 import co.istad.elearningspringapi.domain.Course;
 import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
+import co.istad.elearningspringapi.features.courses.dto.CourseDetailResponse;
 import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,7 +13,7 @@ public interface CourseMapper {
         @Mapping(source = "instructorId", target = "instructor")
         Course fromCourseCreateRequest(CourseCreateRequest courseCreateRequest);
 
-
-        CourseResponse toCourseResponse(Course course);
+         CourseDetailResponse toCourseDetailResponse(Course course);
+         CourseResponse toCourseResponse(Course course);
     }
 
