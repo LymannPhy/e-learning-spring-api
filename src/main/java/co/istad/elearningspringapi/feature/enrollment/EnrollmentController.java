@@ -41,4 +41,10 @@ public class EnrollmentController {
     ) {
         enrollmentService.updateEnrollmentProgress(code, progress);
     }
+
+    @GetMapping("/{code}/progress")
+    public Integer getEnrollmentProgress(@PathVariable String code){
+        return enrollmentService.getEnrollmentProgress(code);
+    }
+
 }

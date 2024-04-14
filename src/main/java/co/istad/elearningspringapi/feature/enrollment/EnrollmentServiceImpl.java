@@ -78,4 +78,14 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setProgress(progress);
         enrollmentRepository.save(enrollment);
     }
+
+    @Override
+    public Integer getEnrollmentProgress(String code) {
+        Enrollment enrollment = enrollmentRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Enrollment not found with code"
+                        ));
+        return enrollment.getProgress();
+    }
+
 }
