@@ -2,9 +2,12 @@ package co.istad.elearningspringapi.features.courses;
 
 import co.istad.elearningspringapi.base.BasedMessage;
 import co.istad.elearningspringapi.domain.Course;
+import co.istad.elearningspringapi.features.category.CategoryRepository;
 import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
 import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
+import co.istad.elearningspringapi.features.courses.dto.CourseThumbnailRequest;
 import co.istad.elearningspringapi.mapper.CourseMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,8 @@ import org.springframework.web.server.ResponseStatusException;
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
+    private final CategoryRepository categoryRepository;
+
     @Override
     public BasedMessage createCourse(CourseCreateRequest courseCreateRequest) {
         if (courseRepository.existsByAlias(courseCreateRequest.alias())){
@@ -38,5 +43,17 @@ public class CourseServiceImpl implements CourseService {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<Course> courses = courseRepository.findAll(pageRequest);
         return courses.map(courseMapper::toCourseResponse);
+    }
+    @Transactional
+    @Override
+    public BasedMessage updateThumbnail(CourseThumbnailRequest coursethumbnailRequest, String alias) {
+        if (!courseRepository.existsByAlias(alias)){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Course Not Found..."
+            );
+        }
+        courseRepository.updateThumbnail(alias, coursethumbnailRequest.thumbnail());
+        return new BasedMessage("Course Thumbnail  has been updated....!");
     }
 }

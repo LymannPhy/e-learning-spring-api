@@ -3,6 +3,7 @@ package co.istad.elearningspringapi.features.courses;
 import co.istad.elearningspringapi.base.BasedMessage;
 import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
 import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
+import co.istad.elearningspringapi.features.courses.dto.CourseThumbnailRequest;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,9 @@ public class CourseController {
                                    @RequestParam(defaultValue = "25") int size
     ){
         return courseService.getCourses(page, size);
+    }
+    @PutMapping("/{alias}/thumbnail")
+   BasedMessage thumbnail(@Valid @RequestBody CourseThumbnailRequest courseThumbnailRequest , @PathVariable String alias){
+        return courseService.updateThumbnail(courseThumbnailRequest,alias);
     }
 }
