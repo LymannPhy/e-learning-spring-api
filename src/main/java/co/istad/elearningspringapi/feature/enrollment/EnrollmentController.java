@@ -47,4 +47,8 @@ public class EnrollmentController {
         return enrollmentService.getEnrollmentProgress(code);
     }
 
+    @PutMapping("/{code}/is-certified")
+    public boolean certifyEnrollment(@PathVariable String code) {
+        return enrollmentService.certifyEnrollment(code);
+    }
 }

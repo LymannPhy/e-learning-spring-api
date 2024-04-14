@@ -88,4 +88,18 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return enrollment.getProgress();
     }
 
+    @Override
+    public boolean certifyEnrollment(String code) {
+        Enrollment enrollment = enrollmentRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Enrollment not found with cod"
+                        ));
+        if (enrollment.getProgress() == 100){
+            enrollment.setIsCertified(true);
+            enrollmentRepository.save(enrollment);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
