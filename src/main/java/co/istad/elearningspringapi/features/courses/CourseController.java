@@ -37,4 +37,12 @@ public class CourseController {
     CourseDetailResponse findDetail (@PathVariable String alias){
         return courseService.findCourseDetailByAlias(alias);
     }
+    @PutMapping("/{alias}/disable")
+    BasedMessage disableCourse(@PathVariable String alias) {
+        return courseService.disableCourse(alias);
+    }
+    @PutMapping("/{alias}/enable")
+    BasedMessage enableCourse(@PathVariable String alias){
+        return courseService.enableCourse(alias);
+    }
 }

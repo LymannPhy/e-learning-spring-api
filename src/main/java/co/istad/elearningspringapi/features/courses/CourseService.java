@@ -14,4 +14,8 @@ public interface CourseService {
 
     CourseDetailResponse findCourseDetailByAlias(String alias);
     BasedMessage updateThumbnail(CourseThumbnailRequest coursethumbnailRequest, String alias);
+
+    BasedMessage disableCourse(String alias);
+
+    BasedMessage enableCourse(String alias);
 }

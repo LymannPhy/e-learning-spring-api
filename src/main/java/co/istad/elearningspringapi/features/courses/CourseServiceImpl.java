@@ -22,7 +22,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
-    private final CategoryRepository categoryRepository;
 
     @Override
     public BasedMessage createCourse(CourseCreateRequest courseCreateRequest) {
@@ -56,7 +55,6 @@ public class CourseServiceImpl implements CourseService {
                 );
         return courseMapper.toCourseDetailResponse(course);
     }
-
     @Transactional
     @Override
     public BasedMessage updateThumbnail(CourseThumbnailRequest coursethumbnailRequest, String alias) {
@@ -68,5 +66,26 @@ public class CourseServiceImpl implements CourseService {
         }
         courseRepository.updateThumbnail(alias, coursethumbnailRequest.thumbnail());
         return new BasedMessage("Course Thumbnail  has been updated....!");
+    }
+    @Transactional
+    @Override
+    public BasedMessage disableCourse(String alias) {
+        Course course = courseRepository.findByAlias(alias)
+                .orElseThrow(
+                        ()->   new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Disabled Course Not Found...!")
+        );
+        courseRepository.disableCourse(alias);
+        return new BasedMessage("Course has been disabled....!");
+    }
+    @Transactional
+    @Override
+    public BasedMessage enableCourse(String alias) {
+        Course course = courseRepository.findByAlias(alias).orElseThrow(
+                ()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Enable Course Not Found...!")
+        );
+        courseRepository.enableCourse(alias);
+        return new BasedMessage("Course has been enabled....!");
     }
 }

@@ -12,7 +12,14 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
     @Modifying
     @Query("update Course AS c set c.thumbnail = ?2 where c.alias =?1")
     void updateThumbnail (String alias, String thumbnail);
-
     Optional<Course> findAllByAlias (String alias);
 
+
+    @Modifying
+    @Query("UPDATE Course c SET c.isDeleted = true WHERE c.alias = :alias")
+    void disableCourse(String alias);
+
+    @Modifying
+    @Query("update Course as c set c.isDeleted=false where c.alias=:alias")
+    void enableCourse(String alias);
 }
