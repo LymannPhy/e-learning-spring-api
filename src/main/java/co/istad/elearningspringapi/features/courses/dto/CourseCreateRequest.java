@@ -18,5 +18,4 @@ public record CourseCreateRequest(
         @NotNull(message = "Instructor is required")
         Instructor instructorId
 ) {
-
 }

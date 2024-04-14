@@ -2,8 +2,12 @@ package co.istad.elearningspringapi.features.courses;
 
 import co.istad.elearningspringapi.base.BasedMessage;
 import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
+import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,5 +21,10 @@ public class CourseController {
     BasedMessage createNew(@Valid @RequestBody CourseCreateRequest courseCreateRequest){
         return courseService.createCourse(courseCreateRequest);
     }
-
+    @GetMapping
+   Page<CourseResponse> allCourses(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "25") int size
+    ){
+        return courseService.getCourses(page, size);
+    }
 }
