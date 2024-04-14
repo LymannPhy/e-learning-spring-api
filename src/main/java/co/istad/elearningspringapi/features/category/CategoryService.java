@@ -10,12 +10,17 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface CategoryService {
-    BasedMessage createNew (CategoryRequest categoryRequest);
+    BasedMessage createNew(CategoryRequest categoryRequest);
+
     CategoryResponse findByAlias(String alias);
-    Page<CategoryResponse> findList(int page,int size);
 
+    Page<CategoryResponse> findList(int page, int size);
 
-    BasedMessage updateCategoryByAlias(String alias,CategoryRequest categoryRequest);
+    BasedMessage updateCategoryByAlias(String alias, CategoryRequest categoryRequest);
 
     List<CategoryParentResponse> getAllParentCategoriesWithSubcategories();
+
+    BasedMessage disableCategory(String alias);
+
+    BasedMessage enableCategory(String alias);
 }

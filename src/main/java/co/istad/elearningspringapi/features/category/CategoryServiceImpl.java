@@ -7,6 +7,7 @@ import co.istad.elearningspringapi.features.category.dto.CategoryRequest;
 import co.istad.elearningspringapi.features.category.dto.CategoryResponse;
 import co.istad.elearningspringapi.features.category.dto.CategorySubCategoryResponse;
 import co.istad.elearningspringapi.mapper.CategoryMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -112,5 +113,27 @@ public class CategoryServiceImpl implements CategoryService {
         );
     }
 
+    @Transactional
+    @Override
+    public BasedMessage disableCategory(String alias) {
+        Category category = categoryRepository.findByAlias(alias).orElseThrow(
+                ()->new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,"Category has not been found in our system please try again..."
+                )
+        );
+        categoryRepository.disableCategory(alias);
+        return new BasedMessage("Category's has been disable...!!");
+    }
 
+    @Transactional
+    @Override
+    public BasedMessage enableCategory(String alias) {
+        Category category = categoryRepository.findByAlias(alias).orElseThrow(
+                ()->new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,"Category has not been found in our system please try again..."
+                )
+        );
+        categoryRepository.enableCategory(alias);
+        return new BasedMessage("Category has been enable...!!");
+    }
 }

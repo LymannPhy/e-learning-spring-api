@@ -22,7 +22,7 @@ public class CategoryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    BasedMessage createNew(@Valid @RequestBody CategoryRequest categoryRequest){
+    BasedMessage createNew(@Valid @RequestBody CategoryRequest categoryRequest) {
         return categoryService.createNew(categoryRequest);
     }
 
@@ -30,11 +30,12 @@ public class CategoryController {
     Page<CategoryResponse> findList(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "25") int size
-            ){
+    ) {
         return categoryService.findList(page, size);
     }
+
     @GetMapping("/{alias}")
-    CategoryResponse findByAlias (@PathVariable String alias){
+    CategoryResponse findByAlias(@PathVariable String alias) {
         return categoryService.findByAlias(alias);
     }
 
@@ -42,8 +43,18 @@ public class CategoryController {
     List<CategoryParentResponse> getAllParentCategoriesWithSubcategories() {
         return categoryService.getAllParentCategoriesWithSubcategories();
     }
+
     @PutMapping("/{alias}")
-    BasedMessage updateCategoryByAlias(@PathVariable String alias,@RequestBody CategoryRequest categoryRequest){
-        return categoryService.updateCategoryByAlias(alias,categoryRequest);
+    BasedMessage updateCategoryByAlias(@PathVariable String alias, @RequestBody CategoryRequest categoryRequest) {
+        return categoryService.updateCategoryByAlias(alias, categoryRequest);
+    }
+
+    @PutMapping("/{alias}/disable")
+    BasedMessage disableCategory(@PathVariable String alias) {
+        return categoryService.disableCategory(alias);
+    }
+    @PutMapping("/{alias}/enable")
+    BasedMessage enableCategory(@PathVariable String alias){
+        return categoryService.enableCategory(alias);
     }
 }

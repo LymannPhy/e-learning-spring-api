@@ -4,7 +4,7 @@ import co.istad.elearningspringapi.domain.Category;
 import jakarta.validation.constraints.NotBlank;
 
 public record CategoryRequest(
-        @NotBlank(message = "Alias is required")
+        @NotBlank(message = "Alias's is required")
         String alias,
 
         String icon,
