@@ -3,6 +3,7 @@ package co.istad.elearningspringapi.feature.role;
 import co.istad.elearningspringapi.feature.role.dto.RoleAuthorityResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,4 +20,11 @@ public class RoleController {
     List<RoleAuthorityResponse> findRoles(){
         return roleService.findRoles();
     }
+
+    @GetMapping("{name}")
+    RoleAuthorityResponse findRoleByName(@PathVariable String name){
+        return roleService.findRoleByName(name);
+    }
+
+
 }

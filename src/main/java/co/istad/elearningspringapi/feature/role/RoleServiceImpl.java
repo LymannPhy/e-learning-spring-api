@@ -5,7 +5,9 @@ import co.istad.elearningspringapi.feature.role.RoleService;
 import co.istad.elearningspringapi.feature.role.dto.RoleAuthorityResponse;
 import co.istad.elearningspringapi.mapper.RoleMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,6 +22,16 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleAuthorityResponse> findRoles() {
         List<Role> roleList = roleRepository.findAll();
         return roleMapper.toRoleAuthorityResponseList(roleList);
-        //return roleList.stream().map(roleMapper::toRoleAuthorityResponse);
+    }
+
+    @Override
+    public RoleAuthorityResponse findRoleByName(String name) {
+        Role role = roleRepository.findByName(name)
+                .orElseThrow(()->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Role has been not found...!"
+                        ));
+        return roleMapper.toRoleAuthorityResponse(role);
     }
 }
