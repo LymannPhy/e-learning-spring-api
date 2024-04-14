@@ -1,8 +1,10 @@
 package co.istad.elearningspringapi.features.courses;
+import co.istad.elearningspringapi.domain.Category;
 import co.istad.elearningspringapi.domain.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 public interface CourseRepository extends JpaRepository<Course,Long> {
@@ -22,4 +24,9 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
     @Modifying
     @Query("update Course as c set c.isDeleted=false where c.alias=:alias")
     void enableCourse(String alias);
+
+    @Modifying
+    @Query("update Course as c set c.category = :category where c.alias = :alias")
+    void updateCourseCategory(@Param("alias") String alias, @Param("category") Category category);
+
 }

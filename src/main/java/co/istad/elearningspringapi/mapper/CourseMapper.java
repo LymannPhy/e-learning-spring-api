@@ -12,7 +12,8 @@ public interface CourseMapper {
         @Mapping(source = "categoryId", target = "category")
         @Mapping(source = "instructorId", target = "instructor")
         Course fromCourseCreateRequest(CourseCreateRequest courseCreateRequest);
-         CourseDetailResponse toCourseDetailResponse(Course course);
-         CourseResponse toCourseResponse(Course course);
-    }
+        CourseDetailResponse toCourseDetailResponse(Course course);
+        CourseResponse toCourseResponse(Course course);
+
+}
 

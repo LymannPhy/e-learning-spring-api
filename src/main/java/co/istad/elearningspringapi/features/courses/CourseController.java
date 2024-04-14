@@ -1,10 +1,7 @@
 package co.istad.elearningspringapi.features.courses;
 
 import co.istad.elearningspringapi.base.BasedMessage;
-import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
-import co.istad.elearningspringapi.features.courses.dto.CourseDetailResponse;
-import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
-import co.istad.elearningspringapi.features.courses.dto.CourseThumbnailRequest;
+import co.istad.elearningspringapi.features.courses.dto.*;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -45,4 +42,16 @@ public class CourseController {
     BasedMessage enableCourse(@PathVariable String alias){
         return courseService.enableCourse(alias);
     }
+    //UPDATE COURSE
+    @PutMapping("/{alias}")
+    BasedMessage updateCourseByAlias(@PathVariable String alias, @Valid @RequestBody CourseUpdateRequest courseUpdateRequest){
+        return courseService.updateCourseByAlias(alias,courseUpdateRequest);
+    }
+
+    // UPDATE COURSE CATEGORY
+    @PutMapping("/{alias}/categories")
+    BasedMessage updateCourseCategory (@PathVariable String alias, @Valid @RequestBody CourseCategoryRequest courseCategoryRequest){
+        return courseService.updateCourseCategory(alias,courseCategoryRequest);
+    }
+
 }

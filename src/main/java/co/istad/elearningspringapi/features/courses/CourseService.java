@@ -2,10 +2,7 @@ package co.istad.elearningspringapi.features.courses;
 
 import co.istad.elearningspringapi.base.BasedMessage;
 import co.istad.elearningspringapi.domain.Course;
-import co.istad.elearningspringapi.features.courses.dto.CourseCreateRequest;
-import co.istad.elearningspringapi.features.courses.dto.CourseDetailResponse;
-import co.istad.elearningspringapi.features.courses.dto.CourseResponse;
-import co.istad.elearningspringapi.features.courses.dto.CourseThumbnailRequest;
+import co.istad.elearningspringapi.features.courses.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 public interface CourseService {
@@ -18,4 +15,7 @@ public interface CourseService {
     BasedMessage disableCourse(String alias);
 
     BasedMessage enableCourse(String alias);
+    BasedMessage updateCourseByAlias(String alias, CourseUpdateRequest courseUpdateRequest);
+    BasedMessage updateCourseCategory(String alias,CourseCategoryRequest courseCategoryRequest);
+
 }

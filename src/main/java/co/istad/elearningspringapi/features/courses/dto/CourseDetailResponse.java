@@ -12,6 +12,7 @@ public record CourseDetailResponse(
         String title,
         Category category,
         Instructor instructor
+
 ) {
 }
 
