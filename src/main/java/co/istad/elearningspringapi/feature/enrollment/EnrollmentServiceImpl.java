@@ -5,6 +5,7 @@ import co.istad.elearningspringapi.domain.Enrollment;
 import co.istad.elearningspringapi.domain.Student;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentCreateRequest;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentFilter;
+import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentProgressResponse;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentResponse;
 import co.istad.elearningspringapi.feature.courses.CourseRepository;
 import co.istad.elearningspringapi.feature.student.StudentRepository;
@@ -80,16 +81,18 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public Integer getEnrollmentProgress(String code) {
+    public Integer findEnrollmentProgress(String code) {
         Enrollment enrollment = enrollmentRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with code"
-                        ));
+                ));
+        log.info("Progress: {}", enrollment.getProgress());
         return enrollment.getProgress();
     }
 
+
     @Override
-    public boolean certifyEnrollment(String code) {
+    public void certifyEnrollment(String code) {
         Enrollment enrollment = enrollmentRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with cod"
@@ -97,9 +100,10 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         if (enrollment.getProgress() == 100){
             enrollment.setIsCertified(true);
             enrollmentRepository.save(enrollment);
-            return true;
         } else {
-            return false;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Enrollment progress should be 100% to certify."
+                    );
         }
     }
 }

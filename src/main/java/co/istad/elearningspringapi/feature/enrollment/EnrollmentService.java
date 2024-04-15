@@ -11,6 +11,6 @@ public interface EnrollmentService {
     Page<EnrollmentResponse> findAllEnrollments(int page, int size, EnrollmentFilter enrollmentFilter);
     EnrollmentResponse findEnrollmentByCode(String code);
     void updateEnrollmentProgress(String code, Integer progress);
-    boolean certifyEnrollment(String code);
-    Integer getEnrollmentProgress(String code);
+    void certifyEnrollment(String code);
+    Integer findEnrollmentProgress(String code);
 }
