@@ -13,4 +13,5 @@ public interface EnrollmentService {
     void updateEnrollmentProgress(String code, Integer progress);
     void certifyEnrollment(String code);
     Integer findEnrollmentProgress(String code);
+    void disableEnrollment(String code);
 }

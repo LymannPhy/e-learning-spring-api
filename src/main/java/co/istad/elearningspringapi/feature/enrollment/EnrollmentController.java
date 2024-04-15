@@ -43,12 +43,17 @@ public class EnrollmentController {
     }
 
     @GetMapping("/{code}/progress")
-    public Integer getEnrollmentProgress(@PathVariable String code){
+    public Integer findEnrollmentProgress(@PathVariable String code){
         return enrollmentService.findEnrollmentProgress(code);
     }
 
     @PutMapping("/{code}/is-certified")
     public void certifyEnrollment(@PathVariable String code) {
         enrollmentService.certifyEnrollment(code);
+    }
+
+    @PutMapping("/{code}")
+    public void disableEnrollment(@PathVariable String code){
+        enrollmentService.disableEnrollment(code);
     }
 }

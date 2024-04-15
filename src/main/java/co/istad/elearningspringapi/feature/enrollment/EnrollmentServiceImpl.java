@@ -5,7 +5,6 @@ import co.istad.elearningspringapi.domain.Enrollment;
 import co.istad.elearningspringapi.domain.Student;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentCreateRequest;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentFilter;
-import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentProgressResponse;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentResponse;
 import co.istad.elearningspringapi.feature.courses.CourseRepository;
 import co.istad.elearningspringapi.feature.student.StudentRepository;
@@ -58,7 +57,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         Sort sort = Sort.by(Sort.Direction.DESC, "enrolledAt");
         PageRequest pageRequest = PageRequest.of(page, size, sort);
         Page<Enrollment> enrollments = enrollmentRepository.findAll(pageRequest);
-        return enrollments.map(enrollmentMapper::toAccountResponse);
+        return enrollments.map(enrollmentMapper::toEnrollmentResponse);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with code"
                         ));
-        return enrollmentMapper.toAccountResponse(enrollment);
+        return enrollmentMapper.toEnrollmentResponse(enrollment);
     }
 
     @Override
@@ -105,5 +104,15 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                     "Enrollment progress should be 100% to certify."
                     );
         }
+    }
+
+    @Override
+    public void disableEnrollment(String code) {
+        Enrollment enrollment = enrollmentRepository.findByCode(code)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Enrollment not found with code"
+                        ));
+        enrollment.setIsDeleted(true);
+        enrollmentRepository.save(enrollment);
     }
 }

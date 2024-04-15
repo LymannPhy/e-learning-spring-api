@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface EnrollmentMapper {
-    EnrollmentResponse toAccountResponse(Enrollment enrollment);
+    EnrollmentResponse toEnrollmentResponse(Enrollment enrollment);
 
 }
