@@ -29,7 +29,6 @@ public record UserDetailsResponse(
 
         String address2,
 
-
         String phoneNumber,
 
         Boolean isVerified,
@@ -41,10 +40,6 @@ public record UserDetailsResponse(
         String nationalIdCard,
 
         String profile,
-
-        Instructor instructor,
-
-        Student student,
 
         String uuid,
 
