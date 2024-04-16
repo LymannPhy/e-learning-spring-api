@@ -1,4 +1,4 @@
-package co.istad.elearningspringapi.feature.user.dto;
+package co.istad.elearningspringapi.features.user.dto;
 
 import co.istad.elearningspringapi.domain.*;
 import jakarta.persistence.*;

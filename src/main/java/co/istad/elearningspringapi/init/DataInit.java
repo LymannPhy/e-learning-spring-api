@@ -3,7 +3,7 @@ package co.istad.elearningspringapi.init;
 
 import co.istad.elearningspringapi.domain.Role;
 import co.istad.elearningspringapi.features.role.RoleRepository;
-import co.istad.elearningspringapi.feature.user.UserRepository;
+import co.istad.elearningspringapi.features.user.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

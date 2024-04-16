@@ -1,6 +1,6 @@
-package co.istad.elearningspringapi.feature.user;
+package co.istad.elearningspringapi.features.user;
 
-import co.istad.elearningspringapi.feature.user.dto.UserDetailsResponse;
+import co.istad.elearningspringapi.features.user.dto.UserDetailsResponse;
 import org.springframework.data.domain.Page;
 
 public interface UserService {
