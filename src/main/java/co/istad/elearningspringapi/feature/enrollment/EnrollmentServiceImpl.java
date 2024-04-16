@@ -43,7 +43,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setIsCertified(false);
         enrollment.setIsDeleted(false);
         enrollment.setProgress(0);
-
         return enrollmentRepository.save(enrollment);
     }
 
