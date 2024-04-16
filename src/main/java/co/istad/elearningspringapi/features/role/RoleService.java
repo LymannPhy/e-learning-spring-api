@@ -1,6 +1,6 @@
-package co.istad.elearningspringapi.feature.role;
+package co.istad.elearningspringapi.features.role;
 
-import co.istad.elearningspringapi.feature.role.dto.RoleAuthorityResponse;
+import co.istad.elearningspringapi.features.role.dto.RoleAuthorityResponse;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package co.istad.elearningspringapi.feature.role.dto;
+package co.istad.elearningspringapi.features.role.dto;
 
 public record RoleResponse(
         String name

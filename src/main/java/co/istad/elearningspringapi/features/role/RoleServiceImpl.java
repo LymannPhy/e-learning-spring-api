@@ -1,8 +1,7 @@
-package co.istad.elearningspringapi.feature.role;
+package co.istad.elearningspringapi.features.role;
 
 import co.istad.elearningspringapi.domain.Role;
-import co.istad.elearningspringapi.feature.role.RoleService;
-import co.istad.elearningspringapi.feature.role.dto.RoleAuthorityResponse;
+import co.istad.elearningspringapi.features.role.dto.RoleAuthorityResponse;
 import co.istad.elearningspringapi.mapper.RoleMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
