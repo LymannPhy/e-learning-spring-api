@@ -7,6 +7,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
-    @Mapping(source = "user.username", target = "username")
+    @Mapping(source = "user.username", target = "user.username")
     StudentResponse toStudentResponse(Student student);
 }

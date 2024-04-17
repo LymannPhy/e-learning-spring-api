@@ -1,9 +1,12 @@
 package co.istad.elearningspringapi.features.student.dto;
 
+import co.istad.elearningspringapi.features.user.dto.UserResponse;
+
 public record StudentResponse(
-        String username,
+        Long id,
         String highSchool,
+        Boolean isBlocked,
         String university,
-        Boolean isBlocked
+        UserResponse user
 ) {
 }
