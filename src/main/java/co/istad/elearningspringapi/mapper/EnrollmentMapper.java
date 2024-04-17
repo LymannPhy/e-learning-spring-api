@@ -1,4 +1,4 @@
-package co.istad.elearningspringapi.map;
+package co.istad.elearningspringapi.mapper;
 
 import co.istad.elearningspringapi.domain.Course;
 import co.istad.elearningspringapi.domain.Enrollment;

@@ -9,7 +9,7 @@ import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentProgressResp
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentResponse;
 import co.istad.elearningspringapi.feature.courses.CourseRepository;
 import co.istad.elearningspringapi.feature.student.StudentRepository;
-import co.istad.elearningspringapi.map.EnrollmentMapper;
+import co.istad.elearningspringapi.mapper.EnrollmentMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
