@@ -1,7 +1,7 @@
 package co.istad.elearningspringapi.features.user.dto;
 
 import co.istad.elearningspringapi.domain.*;
-import jakarta.persistence.*;
+import co.istad.elearningspringapi.features.role.dto.RoleResponse;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,7 +43,7 @@ public record UserDetailsResponse(
 
         String uuid,
 
-        List<Role> roles
+        List<RoleResponse> roles
 ) {
 
 }

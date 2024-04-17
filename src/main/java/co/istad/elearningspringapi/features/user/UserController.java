@@ -14,13 +14,6 @@ public class UserController {
 
     private final UserService userService;
 
-    /*@GetMapping
-    Page<UserDetailsResponse> findUsers(@RequestParam(required = false, defaultValue = "0") int page,
-                               @RequestParam(required = false, defaultValue = "4") int size,
-                               @RequestParam(required = false, defaultValue = "asc") String sort){
-        return userService.findUsers(page, size, sort);
-    }*/
-
     @GetMapping
     List<UserDetailsResponse> findUsers(@RequestParam(required = false, defaultValue = "asc") String sort,
                                         @RequestParam(required = false, defaultValue = "all") String option,

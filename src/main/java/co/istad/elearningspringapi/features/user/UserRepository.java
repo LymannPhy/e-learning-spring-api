@@ -1,8 +1,6 @@
 package co.istad.elearningspringapi.features.user;
 
-import co.istad.elearningspringapi.domain.Role;
 import co.istad.elearningspringapi.domain.User;
-import co.istad.elearningspringapi.features.user.dto.UserDetailsResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,14 +13,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    //Optional findByUsername();
-
-    //@Query("SELECT u FROM User AS u WHERE u.username = :userName")
     Optional<User> findByUsername(String userName);
 
     Optional<User> findByUuid(String uuid);
-
-    Optional<User> findByEmail(String email);
 
     @Modifying
     @Query("""
@@ -59,7 +52,27 @@ public interface UserRepository extends JpaRepository<User, Long> {
     """)
     List<User> findByGenderContaining(String gender);
 
+    @Modifying
+    @Query("""
+    SELECT u FROM User u
+    where u.givenName LIKE %:givenName%
+    """)
+    List<User> findByGivenName(String givenName);
 
-    //List<User> findByRolesContaining(List<Role> roles);
+    @Modifying
+    @Query("""
+    SELECT u FROM User u
+    where u.familyName LIKE %:familyName%
+    """)
+    List<User> findByFamilyName(String familyName);
+
+    @Modifying
+    @Query("""
+    SELECT u FROM User u 
+    JOIN u.roles r
+    WHERE r.name LIKE %:roleName%
+    """)
+    List<User> findByRolesContaining(String roleName);
+
 
 }
