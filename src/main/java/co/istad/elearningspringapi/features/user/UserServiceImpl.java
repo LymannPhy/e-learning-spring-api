@@ -1,5 +1,6 @@
 package co.istad.elearningspringapi.features.user;
 
+import co.istad.elearningspringapi.domain.Role;
 import co.istad.elearningspringapi.domain.User;
 import co.istad.elearningspringapi.features.user.dto.UserDetailsResponse;
 import co.istad.elearningspringapi.mapper.UserMapper;
@@ -10,6 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +48,37 @@ public class UserServiceImpl implements UserService{
         PageRequest pageRequest = PageRequest.of(page, size, sortById);
         Page<User> users = userRepository.findAll(pageRequest);
         return users.map(userMapper::toUserDetailsResponse);
+    }
+
+    @Override
+    public List<UserDetailsResponse> findUsers(String sort, String option, String filter) {
+        //filter by userName
+        List<User> userList = new ArrayList<>();
+        if(option.equalsIgnoreCase("userName")){
+            userList = userRepository.findByUsernameContaining(filter)
+                    .orElseThrow(()->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "userName has been found userName: "+filter
+                            ));
+        }
+        else if (option.equalsIgnoreCase("email")) {
+            userList = userRepository.findByEmailContaining(filter);
+        }
+        else if(option.equalsIgnoreCase("nationalIdCard")) {
+            userList = userRepository.findByNationalIdCardContaining(filter);
+        }
+        else if(option.equalsIgnoreCase("phoneNumber")) {
+            userList = userRepository.findByPhoneNumberContaining(filter);
+        }
+        else if(option.equalsIgnoreCase("gender")) {
+            userList = userRepository.findByGenderContaining(filter);
+        }
+        else
+            userList = userRepository.findAll();
+
+        return userMapper.toUserDetailsResponseList(userList);
+
     }
 
     @Override
