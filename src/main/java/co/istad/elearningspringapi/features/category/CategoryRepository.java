@@ -22,10 +22,10 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findByParentCategory(Category parentCategory);
 
     @Modifying
-    @Query("UPDATE Category c SET c.isDeleted = false WHERE c.alias = :alias")
+    @Query("UPDATE Category c SET c.isDeleted = true WHERE c.alias = :alias")
     void disableCategory(String alias);
 
     @Modifying
-    @Query("update Category as c set c.isDeleted=true where c.alias=:alias")
+    @Query("update Category as c set c.isDeleted=false where c.alias=:alias")
     void enableCategory(String alias);
 }

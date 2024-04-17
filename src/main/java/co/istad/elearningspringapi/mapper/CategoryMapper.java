@@ -18,13 +18,13 @@ public interface CategoryMapper {
     @Mapping(source = "parentCategoryId", target = "parentCategory")
     Category fromCategoryRequest(CategoryRequest categoryRequest);
 
-    @Mapping(source = "parentCategory", target = "parentCategoryId")
+
     CategoryResponse toCategory(Category category);
 
     CategoryParentResponse toDto(Category category);
 
-    @Mapping(source = "parentCategoryId", target = "parentCategory")
-    void fromUserUpadateRequest(CategoryRequest categoryRequest, @MappingTarget Category category);
+
+    void fromUserUpdateRequest(CategoryRequest categoryRequest, @MappingTarget Category category);
 
 
 

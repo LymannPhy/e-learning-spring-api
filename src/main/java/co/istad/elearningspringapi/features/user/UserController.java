@@ -20,22 +20,22 @@ public class UserController {
         return userService.findUsers(sort, option, filter);
     }
 
-    @GetMapping("{userName}")
+    @GetMapping("/{userName}")
     UserDetailsResponse findByUserName(@PathVariable String userName){
         return userService.findByUserName(userName);
     }
 
-    @PutMapping("{uuid}/disable")
+    @PutMapping("/{uuid}/disable")
     void disableUserByUuid(@PathVariable String uuid){
         userService.disableUserByUuid(uuid);
     }
 
-    @PutMapping("{uuid}/enable")
+    @PutMapping("/{uuid}/enable")
     void enableUserByUuid(@PathVariable String uuid){
         userService.enableUserByUuid(uuid);
     }
 
-    @DeleteMapping("{userName}/delete")
+    @DeleteMapping("/{userName}/delete")
     void deleteUserByUuid(@PathVariable String userName){
         userService.deleteUserByUserName(userName);
     }

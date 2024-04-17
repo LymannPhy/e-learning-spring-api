@@ -5,6 +5,7 @@ import co.istad.elearningspringapi.domain.Category;
 import co.istad.elearningspringapi.domain.Course;
 import co.istad.elearningspringapi.features.category.CategoryRepository;
 import co.istad.elearningspringapi.features.courses.dto.*;
+import co.istad.elearningspringapi.features.instructor.InstructorRepository;
 import co.istad.elearningspringapi.mapper.CourseMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
     private final CategoryRepository categoryRepository;
+    private final InstructorRepository instructorRepository;
 
     @Override
     public BasedMessage createCourse(CourseCreateRequest courseCreateRequest) {
@@ -28,6 +30,18 @@ public class CourseServiceImpl implements CourseService {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Alias are already existing in our system..!"
+            );
+        }
+        if (!categoryRepository.existsById(Math.toIntExact(courseCreateRequest.categoryId().getId()))){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "The Category ID ("+courseCreateRequest.categoryId().getId()+") don't have in our system...!"
+            );
+        }
+        if (!instructorRepository.existsById(courseCreateRequest.instructorId().getId())){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "The Instructor ID ("+courseCreateRequest.instructorId().getId()+") don't have in our system...!"
             );
         }
         //logic here

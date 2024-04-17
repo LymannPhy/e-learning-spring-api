@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
             );
         }
         Category category = categoryMapper.fromCategoryRequest(categoryRequest);
-        category.setIsDeleted(true);
+        category.setIsDeleted(false);
         categoryRepository.save(category);
         return new BasedMessage("Category has been added.....");
     }
@@ -73,7 +73,7 @@ public class CategoryServiceImpl implements CategoryService {
                         HttpStatus.NOT_FOUND, "Category has not been found in our system please try again..."
                 )
         );
-        categoryMapper.fromUserUpadateRequest(categoryRequest, updateCategory);
+        categoryMapper.fromUserUpdateRequest(categoryRequest, updateCategory);
         categoryRepository.save(updateCategory);
         return new BasedMessage("Category's has been updated...");
     }
@@ -116,7 +116,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public BasedMessage disableCategory(String alias) {
-        Category category = categoryRepository.findByAlias(alias).orElseThrow(
+        categoryRepository.findByAlias(alias).orElseThrow(
                 ()->new ResponseStatusException(
                         HttpStatus.NOT_FOUND,"Category has not been found in our system please try again..."
                 )
@@ -128,7 +128,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public BasedMessage enableCategory(String alias) {
-        Category category = categoryRepository.findByAlias(alias).orElseThrow(
+        categoryRepository.findByAlias(alias).orElseThrow(
                 ()->new ResponseStatusException(
                         HttpStatus.NOT_FOUND,"Category has not been found in our system please try again..."
                 )
