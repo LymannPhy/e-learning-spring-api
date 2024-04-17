@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleAuthorityResponse findRoleByName(String name) {
-        Role role = roleRepository.findByName(name)
+        Role role = roleRepository.findByNameIgnoreCase(name)
                 .orElseThrow(()->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
