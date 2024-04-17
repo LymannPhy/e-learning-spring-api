@@ -34,6 +34,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
         Student student = studentRepository.findById(enrollmentCreateRequest.studentId())
                 .orElseThrow(() -> new IllegalArgumentException("Student not found with id: " + enrollmentCreateRequest.studentId()));
+        if (course == null || student == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Course or student not found");
+        }
 
         Enrollment enrollment = new Enrollment();
         enrollment.setCode(enrollmentCreateRequest.code());
@@ -46,6 +49,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setProgress(enrollmentCreateRequest.progress());
         return enrollmentRepository.save(enrollment);
     }
+
 
     @Override
     public Page<EnrollmentResponse> findAllEnrollments(int page, int size, EnrollmentFilter enrollmentFilter) {

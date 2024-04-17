@@ -1,17 +1,17 @@
 package co.istad.elearningspringapi.feature.enrollment.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
 public record EnrollmentCreateRequest(
-        @NotBlank
+        @NotBlank(message = "Code is required")
         String code,
-        @NotNull
+        @NotNull(message = "Course ID is required")
+        @Positive(message = "Course ID must be positive")
         Long courseId,
-        @NotNull
+        @NotNull(message = "Student ID is required")
+        @Positive(message = "Student ID must be positive")
         Long studentId,
         @NotNull
         LocalDateTime enrolledAt,
