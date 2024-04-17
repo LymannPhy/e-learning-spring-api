@@ -5,6 +5,7 @@ import co.istad.elearningspringapi.domain.Enrollment;
 import co.istad.elearningspringapi.domain.Student;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentCreateRequest;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentFilter;
+import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentProgressResponse;
 import co.istad.elearningspringapi.feature.enrollment.dto.EnrollmentResponse;
 import co.istad.elearningspringapi.feature.courses.CourseRepository;
 import co.istad.elearningspringapi.feature.student.StudentRepository;
@@ -42,7 +43,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setCertifiedAt(null);
         enrollment.setIsCertified(false);
         enrollment.setIsDeleted(false);
-        enrollment.setProgress(0);
+        enrollment.setProgress(enrollmentCreateRequest.progress());
         return enrollmentRepository.save(enrollment);
     }
 
@@ -56,16 +57,32 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         Sort sort = Sort.by(Sort.Direction.DESC, "enrolledAt");
         PageRequest pageRequest = PageRequest.of(page, size, sort);
         Page<Enrollment> enrollments = enrollmentRepository.findAll(pageRequest);
-        return enrollments.map(enrollmentMapper::toEnrollmentResponse);
+        return enrollments.map(enrollment -> {
+            return new EnrollmentResponse(
+                    enrollment.getCode(),
+                    enrollmentMapper.toCourseResponse(enrollment.getCourse()),
+                    enrollmentMapper.toStudentResponse(enrollment.getStudent()),
+                    enrollment.getEnrolledAt(),
+                    enrollment.getIsCertified(),
+                    enrollment.getProgress()
+            );
+        });
     }
 
     @Override
     public EnrollmentResponse findEnrollmentByCode(String code) {
-        Enrollment enrollment = enrollmentRepository.findByCode(code)
+        Enrollment enrollments = enrollmentRepository.findByCode(code)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with code"
                         ));
-        return enrollmentMapper.toEnrollmentResponse(enrollment);
+            return new EnrollmentResponse(
+                    enrollments.getCode(),
+                    enrollmentMapper.toCourseResponse(enrollments.getCourse()),
+                    enrollmentMapper.toStudentResponse(enrollments.getStudent()),
+                    enrollments.getEnrolledAt(),
+                    enrollments.getIsCertified(),
+                    enrollments.getProgress()
+            );
     }
 
     @Override
@@ -79,21 +96,20 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public Integer findEnrollmentProgress(String code) {
+    public EnrollmentProgressResponse findEnrollmentProgress(String code) {
         Enrollment enrollment = enrollmentRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with code"
                 ));
         log.info("Progress: {}", enrollment.getProgress());
-        return enrollment.getProgress();
+        return new EnrollmentProgressResponse(enrollment.getProgress());
     }
-
 
     @Override
     public void certifyEnrollment(String code) {
         Enrollment enrollment = enrollmentRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Enrollment not found with cod"
+                        "Enrollment not found with code"
                         ));
         if (enrollment.getProgress() == 100){
             enrollment.setIsCertified(true);
@@ -111,7 +127,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with code"
                         ));
-        enrollment.setIsDeleted(true);
+        enrollment.setIsDeleted(false);
         enrollmentRepository.save(enrollment);
     }
 }

@@ -1,5 +1,6 @@
 package co.istad.elearningspringapi.feature.enrollment.dto;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,12 +11,13 @@ public record EnrollmentCreateRequest(
         String code,
         @NotNull
         Long courseId,
-
         @NotNull
         Long studentId,
-
         @NotNull
-        LocalDateTime enrolledAt
+        LocalDateTime enrolledAt,
+        @NotNull
+        @Max(100)
+        Integer progress
 ) {
 }
 
