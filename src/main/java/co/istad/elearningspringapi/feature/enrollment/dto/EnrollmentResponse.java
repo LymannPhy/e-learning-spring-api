@@ -11,6 +11,7 @@ public record EnrollmentResponse(
         StudentResponse studentId,
         LocalDateTime enrolledAt,
         Boolean isCertified,
+        Boolean isDeleted,
         Integer progress
 ) {
 }

@@ -64,6 +64,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                     enrollmentMapper.toStudentResponse(enrollment.getStudent()),
                     enrollment.getEnrolledAt(),
                     enrollment.getIsCertified(),
+                    enrollment.getIsDeleted(),
                     enrollment.getProgress()
             );
         });
@@ -81,6 +82,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                     enrollmentMapper.toStudentResponse(enrollments.getStudent()),
                     enrollments.getEnrolledAt(),
                     enrollments.getIsCertified(),
+                    enrollments.getIsDeleted(),
                     enrollments.getProgress()
             );
     }
@@ -127,7 +129,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Enrollment not found with code"
                         ));
-        enrollment.setIsDeleted(false);
+        enrollment.setIsDeleted(true);
         enrollmentRepository.save(enrollment);
     }
 }
