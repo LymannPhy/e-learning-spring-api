@@ -3,13 +3,17 @@ package co.istad.elearningspringapi.init;
 
 import co.istad.elearningspringapi.domain.Authority;
 import co.istad.elearningspringapi.domain.Role;
+import co.istad.elearningspringapi.domain.User;
 import co.istad.elearningspringapi.features.authority.AuthorityRepository;
 import co.istad.elearningspringapi.features.role.RoleRepository;
+import co.istad.elearningspringapi.features.user.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -17,11 +21,12 @@ public class DataInit {
 
     private final RoleRepository roleRepository;
     private final AuthorityRepository authorityRepository;
+    private final UserRepository userRepository;
 
     @PostConstruct
     void init(){
 
-        // authority init (if needed)
+        // init authorities
         if(authorityRepository.count()<1){
             Authority read = new Authority();
             read.setName("read");
@@ -38,7 +43,7 @@ public class DataInit {
             authorityRepository.saveAll(List.of(read, write, update, delete));
         }
 
-        // init role
+        // init roles
         if (roleRepository.count() < 1){
             Role student = new Role();
             student.setName("STUDENT");
@@ -70,6 +75,37 @@ public class DataInit {
             roleRepository.saveAll(List.of(student, instructor, user, admin));
         }
 
-    }
+        // init users
+        if(userRepository.count() < 10){
+            List<Role> roles = roleRepository.findAll();
+            int roleIndex = 0;
+            for (int i = 0; i < 10; i++) {
+                User user = new User();
+                user.setUsername("username" + i);
+                user.setPassword("password" + i);
+                user.setEmail("email" + i + "@example.com");
+                user.setGender(i % 2 == 0 ? "Male" : "Female");
+                user.setGivenName("John" + i);
+                user.setFamilyName("Doe" + i);
+                user.setDob(LocalDate.of(1990 + i, 1, 1));
+                user.setAddress1("Street 200" + i);
+                user.setAddress2("PP" + i);
+                user.setPhoneNumber("0123456789" + i);
+                user.setNationalIdCard("0993456789" + i);
+                user.setIsVerified(true);
+                user.setVerifiedCode("verification_code" + i);
+                user.setIsDeleted(false);
+                user.setProfile("profile_data" + i);
+                user.setUuid(UUID.randomUUID().toString());
 
+                // set role for the user based on roleIndex
+                user.setRoles(List.of(roles.get(roleIndex)));
+
+                // increment roleIndex and reset to 0 if it exceeds the number of roles
+                roleIndex = (roleIndex + 1) % roles.size();
+
+                userRepository.save(user);
+            }
+        }
+    }
 }
