@@ -23,4 +23,7 @@ public class Authority {
 
     @ManyToMany(mappedBy = "authorities")
     private List<Role> roles;
+
+    //@ManyToOne
+    //private Role roles;
 }
