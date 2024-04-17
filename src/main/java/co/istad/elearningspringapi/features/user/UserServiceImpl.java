@@ -52,33 +52,35 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<UserDetailsResponse> findUsers(String sort, String option, String filter) {
-        //filter by userName
-        List<User> userList = new ArrayList<>();
-        if(option.equalsIgnoreCase("userName")){
+        Sort sortById;
+        if (sort.equalsIgnoreCase("desc")) {
+            sortById = Sort.by(Sort.Direction.DESC, "id");
+        } else {
+            sortById = Sort.by(Sort.Direction.ASC, "id");
+        }
+
+        List<User> userList;
+
+        if (option.equalsIgnoreCase("userName")) {
             userList = userRepository.findByUsernameContaining(filter)
-                    .orElseThrow(()->
+                    .orElseThrow(() ->
                             new ResponseStatusException(
                                     HttpStatus.NOT_FOUND,
-                                    "userName has been found userName: "+filter
+                                    "Username not found: " + filter
                             ));
-        }
-        else if (option.equalsIgnoreCase("email")) {
+        } else if (option.equalsIgnoreCase("email")) {
             userList = userRepository.findByEmailContaining(filter);
-        }
-        else if(option.equalsIgnoreCase("nationalIdCard")) {
+        } else if (option.equalsIgnoreCase("nationalIdCard")) {
             userList = userRepository.findByNationalIdCardContaining(filter);
-        }
-        else if(option.equalsIgnoreCase("phoneNumber")) {
+        } else if (option.equalsIgnoreCase("phoneNumber")) {
             userList = userRepository.findByPhoneNumberContaining(filter);
-        }
-        else if(option.equalsIgnoreCase("gender")) {
+        } else if (option.equalsIgnoreCase("gender")) {
             userList = userRepository.findByGenderContaining(filter);
+        } else {
+            userList = userRepository.findAll(sortById);
         }
-        else
-            userList = userRepository.findAll();
 
         return userMapper.toUserDetailsResponseList(userList);
-
     }
 
     @Override

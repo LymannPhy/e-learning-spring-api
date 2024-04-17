@@ -23,8 +23,8 @@ public class UserController {
 
     @GetMapping
     List<UserDetailsResponse> findUsers(@RequestParam(required = false, defaultValue = "asc") String sort,
-                                        @RequestParam(required = false) String option,
-                                        @RequestParam(required = false) String filter){
+                                        @RequestParam(required = false, defaultValue = "all") String option,
+                                        @RequestParam(required = false, defaultValue = "default") String filter){
         return userService.findUsers(sort, option, filter);
     }
 
