@@ -29,42 +29,42 @@ public interface UserRepository extends JpaRepository<User, Long> {
     SELECT u FROM User u
     where u.email LIKE %:email%
     """)
-    List<User> findByEmailContaining(String email);
+    Optional<List<User>> findByEmailContaining(String email);
 
     @Modifying
     @Query("""
     SELECT u FROM User u
     where u.nationalIdCard LIKE %:nationalIdCard%
     """)
-    List<User> findByNationalIdCardContaining(String nationalIdCard);
+    Optional<List<User>> findByNationalIdCardContaining(String nationalIdCard);
 
     @Modifying
     @Query("""
     SELECT u FROM User u
     where u.phoneNumber LIKE %:phoneNumber%
     """)
-    List<User> findByPhoneNumberContaining(String phoneNumber);
+    Optional<List<User>> findByPhoneNumberContaining(String phoneNumber);
 
     @Modifying
     @Query("""
     SELECT u FROM User u
     where u.gender LIKE %:gender%
     """)
-    List<User> findByGenderContaining(String gender);
+    Optional<List<User>> findByGenderContaining(String gender);
 
     @Modifying
     @Query("""
     SELECT u FROM User u
     where u.givenName LIKE %:givenName%
     """)
-    List<User> findByGivenName(String givenName);
+    Optional<List<User>> findByGivenName(String givenName);
 
     @Modifying
     @Query("""
     SELECT u FROM User u
     where u.familyName LIKE %:familyName%
     """)
-    List<User> findByFamilyName(String familyName);
+    Optional<List<User>> findByFamilyName(String familyName);
 
     @Modifying
     @Query("""
@@ -72,7 +72,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     JOIN u.roles r
     WHERE r.name LIKE %:roleName%
     """)
-    List<User> findByRolesContaining(String roleName);
-
+    Optional<List<User>> findByRolesContaining(String roleName);
 
 }

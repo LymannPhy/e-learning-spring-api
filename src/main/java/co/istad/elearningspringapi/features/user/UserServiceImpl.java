@@ -35,24 +35,119 @@ public class UserServiceImpl implements UserService{
                     .orElseThrow(() ->
                             new ResponseStatusException(
                                     HttpStatus.NOT_FOUND,
-                                    "Username not found: " + filter
+                                    "Username has been not found: " + filter
                             ));
             if (userList.isEmpty()){
                 throw new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
-                        "Username not found: " + filter
+                        "Username has been not found: " + filter
                 );
             }
-        } else if (option.equalsIgnoreCase("email")) {
-            userList = userRepository.findByEmailContaining(filter);
-        } else if (option.equalsIgnoreCase("nationalIdCard")) {
-            userList = userRepository.findByNationalIdCardContaining(filter);
-        } else if (option.equalsIgnoreCase("phoneNumber")) {
-            userList = userRepository.findByPhoneNumberContaining(filter);
-        } else if (option.equalsIgnoreCase("gender")) {
-            userList = userRepository.findByGenderContaining(filter);
-        } else if (option.equalsIgnoreCase("roles")) {
-            userList = userRepository.findByRolesContaining(filter);
+        }
+
+        else if (option.equalsIgnoreCase("email")) {
+            userList = userRepository.findByEmailContaining(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "Email has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Username been not found: " + filter
+                );
+            }
+        }
+
+         else if (option.equalsIgnoreCase("nationalIdCard")) {
+            userList = userRepository.findByNationalIdCardContaining(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "nationalIdCard has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "NationalIdCard been not found: " + filter
+                );
+            }
+        }
+
+         else if (option.equalsIgnoreCase("phoneNumber")) {
+            userList = userRepository.findByPhoneNumberContaining(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "phoneNumber has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "phoneNumber been not found: " + filter
+                );
+            }
+        }
+
+         else if (option.equalsIgnoreCase("gender")) {
+            userList = userRepository.findByGenderContaining(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "gender has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "gender been not found: " + filter
+                );
+            }
+        }
+
+        else if (option.equalsIgnoreCase("familyName")) {
+            userList = userRepository.findByFamilyName(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "familyName has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "familyName been not found: " + filter
+                );
+            }
+        }
+
+        else if (option.equalsIgnoreCase("givenName")) {
+            userList = userRepository.findByGivenName(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "givenName has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "givenName been not found: " + filter
+                );
+            }
+        }
+
+         else if (option.equalsIgnoreCase("roles")) {
+            userList = userRepository.findByRolesContaining(filter)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "roles has been not found: " + filter
+                            ));
+            if (userList.isEmpty()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "roles been not found: " + filter
+                );
+            }
         }
         else {
             userList = userRepository.findAll(sortById);

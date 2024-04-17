@@ -2,7 +2,6 @@ package co.istad.elearningspringapi.features.user;
 
 import co.istad.elearningspringapi.features.user.dto.UserDetailsResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
