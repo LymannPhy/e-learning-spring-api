@@ -10,9 +10,9 @@ public interface UserService {
 
     UserDetailsResponse findByUserName(String userName);
 
-    void disableUserByUuid(String uuid);
+    void disableUserByUserName(String userName);
 
-    void enableUserByUuid(String uuid);
+    void enableUserByUserName(String userName);
 
     void deleteUserByUserName(String userName);
 }

@@ -169,24 +169,24 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void disableUserByUuid(String uuid) {
-        User user = userRepository.findByUuid(uuid)
+    public void disableUserByUserName(String userName) {
+        User user = userRepository.findByUsername(userName)
                 .orElseThrow(()->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "User has been not found...!"
+                                "userName has been not found: "+userName
                         ));
         user.setIsDeleted(true);
         userRepository.save(user);
     }
 
     @Override
-    public void enableUserByUuid(String uuid) {
-        User user = userRepository.findByUuid(uuid)
+    public void enableUserByUserName(String userName) {
+        User user = userRepository.findByUsername(userName)
                 .orElseThrow(()->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "User has been not found...!"
+                                "userName has been not found: "+userName
                         ));
         user.setIsDeleted(false);
         userRepository.save(user);
