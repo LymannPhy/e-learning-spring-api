@@ -25,10 +25,10 @@ public class DataInit {
     private final UserRepository userRepository;
 
     @PostConstruct
-    void init(){
+    void init() {
 
         // authority init (if needed)
-        if(authorityRepository.count()<1){
+        if (authorityRepository.count() < 1) {
             Authority read = new Authority();
             read.setName("read");
 
@@ -45,7 +45,7 @@ public class DataInit {
         }
 
         // init role
-        if (roleRepository.count() < 1){
+        if (roleRepository.count() < 1) {
             Role student = new Role();
             student.setName("STUDENT");
 
@@ -77,7 +77,7 @@ public class DataInit {
         }
 
         // init countries
-        if (countryRepository.count() < 1){
+        if (countryRepository.count() < 1) {
             Country usa = new Country();
             usa.setFlag("US_Flag");
             usa.setIso("US");
@@ -130,37 +130,96 @@ public class DataInit {
             cityRepository.saveAll(List.of(newYork, losAngeles, toronto, phnomPenh));
         }
 
-        // init users
-        if(userRepository.count() < 10){
+        if (userRepository.count() < 10) {
             List<Role> roles = roleRepository.findAll();
-            int roleIndex = 0;
-            for (int i = 0; i < 10; i++) {
-                User user = new User();
-                user.setUsername("username" + i);
-                user.setPassword("password" + i);
-                user.setEmail("email" + i + "@example.com");
-                user.setGender(i % 2 == 0 ? "Male" : "Female");
-                user.setGivenName("John" + i);
-                user.setFamilyName("Doe" + i);
-                user.setDob(LocalDate.of(1990 + i, 1, 1));
-                user.setAddress1("Street 200" + i);
-                user.setAddress2("PP" + i);
-                user.setPhoneNumber("0123456789" + i);
-                user.setNationalIdCard("0993456789" + i);
-                user.setIsVerified(true);
-                user.setVerifiedCode("verification_code" + i);
-                user.setIsDeleted(false);
-                user.setProfile("profile_data" + i);
-                user.setUuid(UUID.randomUUID().toString());
 
-                // set role for the user based on roleIndex
-                user.setRoles(List.of(roles.get(roleIndex)));
+            initializeUser("Sokny", "1234",
+                    "psnpsn66@example.com", "Male",
+                    "Jack", "Happy",
+                    LocalDate.of(1991, 1, 1),
+                    "Street 2002", "PP",
+                    "01234567891", "09934567891",
+                    "verification_code1",
+                    "profile_data1", UUID.randomUUID().toString(),
+                    roles.get(1));
 
-                // increment roleIndex and reset to 0 if it exceeds the number of roles
-                roleIndex = (roleIndex + 1) % roles.size();
+            initializeUser("Mengseu", "5533",
+                    "mengseu@example.com", "Male",
+                    "seu seu", "seu seu",
+                    LocalDate.of(1991, 1, 1),
+                    "Wat Phnom", "Don Penh",
+                    "01256232322", "0988877891",
+                    "verification_code2",
+                    "profile_data2", UUID.randomUUID().toString(),
+                    roles.get(2));
 
-                userRepository.save(user);
-            }
+            initializeUser("Lymann", "5566",
+                    "lymann@example.com", "Male",
+                    "mazer", "mann",
+                    LocalDate.of(1991, 1, 1),
+                    "PP", "BB",
+                    "03356232322", "0998877891",
+                    "verification_code2",
+                    "profile_data3", UUID.randomUUID().toString(),
+                    roles.get(2));
+
+            initializeUser("Taingey", "1100",
+                    "psn55@example.com", "Male",
+                    "taingey", "handsome",
+                    LocalDate.of(1991, 1, 1),
+                    "PP", "TK",
+                    "077336699", "07788877891",
+                    "verification_code4",
+                    "profile_data2", UUID.randomUUID().toString(),
+                    roles.get(1));
+
+            initializeUser("Vipha", "3333",
+                    "psn77@example.com", "Female",
+                    "seu seu", "seu seu",
+                    LocalDate.of(1991, 1, 1),
+                    "PP", "SS",
+                    "0125628899", "0118877891",
+                    "verification_code5",
+                    "profile_data2", UUID.randomUUID().toString(),
+                    roles.get(3));
+
+            initializeUser("Thyda", "4444",
+                    "thyda@example.com", "Female",
+                    "seu seu", "seu seu",
+                    LocalDate.of(1991, 1, 1),
+                    "Wat Phnom", "SS",
+                    "0175628899", "0158877891",
+                    "verification_code6",
+                    "profile_data2", UUID.randomUUID().toString(),
+                    roles.get(3));
+
         }
+    }
+
+    private void initializeUser(String username, String password, String email, String gender,
+                                String givenName, String familyName, LocalDate dob, String address1,
+                                String address2, String phoneNumber, String nationalIdCard,
+                                String verifiedCode,
+                                String profile, String uuid, Role role) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setGender(gender);
+        user.setGivenName(givenName);
+        user.setFamilyName(familyName);
+        user.setDob(dob);
+        user.setAddress1(address1);
+        user.setAddress2(address2);
+        user.setPhoneNumber(phoneNumber);
+        user.setNationalIdCard(nationalIdCard);
+        user.setIsVerified(true);
+        user.setVerifiedCode(verifiedCode);
+        user.setIsDeleted(false);
+        user.setProfile(profile);
+        user.setUuid(uuid);
+        user.setRoles(List.of(role));
+
+        userRepository.save(user);
     }
 }
