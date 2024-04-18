@@ -18,7 +18,6 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-
     @Override
     public List<UserDetailsResponse> findUsers(String sort, String option, String filter) {
         Sort sortById;
@@ -91,7 +90,7 @@ public class UserServiceImpl implements UserService{
         }
 
         else if (option.equalsIgnoreCase("gender")) {
-            userList = userRepository.findByGenderContaining(filter)
+            userList = userRepository.findByGenderContainingIgnoreCase(filter)
                     .orElseThrow(() ->
                             new ResponseStatusException(
                                     HttpStatus.NOT_FOUND,
@@ -136,7 +135,7 @@ public class UserServiceImpl implements UserService{
         }
 
         else if (option.equalsIgnoreCase("roles")) {
-            userList = userRepository.findByRolesContaining(filter)
+            userList = userRepository.findByRolesContainingIgnoreCase(filter)
                     .orElseThrow(() ->
                             new ResponseStatusException(
                                     HttpStatus.NOT_FOUND,

@@ -48,9 +48,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("""
     SELECT u FROM User u
-    where u.gender LIKE %:gender%
+    WHERE LOWER(u.gender) = LOWER(:gender)
+    OR UPPER(u.gender) = UPPER(:gender)
+    OR INITCAP(u.gender) = INITCAP(:gender)
     """)
-    Optional<List<User>> findByGenderContaining(String gender);
+    Optional<List<User>> findByGenderContainingIgnoreCase(String gender);
+
 
     @Modifying
     @Query("""
@@ -70,8 +73,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("""
     SELECT u FROM User u 
     JOIN u.roles r
-    WHERE r.name LIKE %:roleName%
+    WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :roleName, '%'))
     """)
-    Optional<List<User>> findByRolesContaining(String roleName);
+    Optional<List<User>> findByRolesContainingIgnoreCase(String roleName);
 
 }
